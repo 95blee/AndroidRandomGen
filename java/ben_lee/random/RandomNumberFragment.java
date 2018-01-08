@@ -20,7 +20,7 @@ public class RandomNumberFragment extends Fragment {
     private static final int UPPER_BOUND_LIMIT = 9999;
     private static final int LOWER_BOUND_LIMIT = -9999;
 
-    SecureRandom random = new SecureRandom();
+    private SecureRandom random = new SecureRandom();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

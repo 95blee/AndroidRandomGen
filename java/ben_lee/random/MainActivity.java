@@ -1,5 +1,7 @@
 package ben_lee.random;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private String[] choices_array;
     private ActionBarDrawerToggle mDrawerToggle;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 return;
             }
-            RandomNumberFragment randNumFragment = new RandomNumberFragment();
+            Fragment randNumFragment = new RandomNumberFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, randNumFragment).commit();
         }
     }
@@ -65,7 +66,29 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             mDrawerLayout.closeDrawer(findViewById(R.id.left_drawer));
+            switchOption(position);
         }
+    }
+
+    private void switchOption(int position) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Fragment newFragment = null;
+        switch (position) {
+            case 0:
+                newFragment = new RandomNumberFragment();
+                break;
+            case 1:
+                newFragment = new RandomChoiceFragment();
+            case 2:
+            case 3:
+            default:
+                break;
+        }
+        if (newFragment != null) {
+            transaction.replace(R.id.fragment_container, newFragment);
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
     }
 
 }
