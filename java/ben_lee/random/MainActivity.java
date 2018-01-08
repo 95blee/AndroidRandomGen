@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private String[] choices_array;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private Fragment oldFragment = null;
+    private Fragment fragmentToSet = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             Fragment randNumFragment = new RandomNumberFragment();
+            oldFragment = randNumFragment;
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, randNumFragment).commit();
         }
     }
@@ -52,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, appBar, R.string.drawer_open, R.string.drawer_open) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
+                replaceFragment();
             }
-
             public void onDrawerOpen(View drawerView) {
                 super.onDrawerOpened(drawerView);
             }
@@ -71,24 +75,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchOption(int position) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        Fragment newFragment = null;
         switch (position) {
             case 0:
-                newFragment = new RandomNumberFragment();
+                fragmentToSet = new RandomNumberFragment();
                 break;
             case 1:
-                newFragment = new RandomChoiceFragment();
+                fragmentToSet = new RandomChoiceFragment();
             case 2:
             case 3:
             default:
                 break;
         }
-        if (newFragment != null) {
-            transaction.replace(R.id.fragment_container, newFragment);
+    }
+
+    private void replaceFragment() {
+        if (!fragmentToSet.getClass().toString().equals(oldFragment.getClass().toString())) {
+            oldFragment = fragmentToSet;
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fragmentToSet);
             transaction.addToBackStack(null);
+            transaction.commit();
         }
-        transaction.commit();
     }
 
 }

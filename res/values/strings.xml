@@ -21,4 +21,11 @@
     <string name="choice_five_label">Choice 5</string>
     <string name="choice_declaration_string">Random choice is:</string>
     <string name="choice_button_label">Make random choice</string>
+
+    <!-- Strings for coin flip -->
+    <string name="coin_flip_hint">Press the button to flip the coin</string>
+    <string name="heads">H</string>
+    <string name="tails">T</string>
+    <string name="coin_button_press">Flip coin</string>
+
 </resources>

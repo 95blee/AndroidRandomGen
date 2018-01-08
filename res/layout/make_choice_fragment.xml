@@ -5,14 +5,7 @@
 
     <TextView
         android:id="@+id/make_choice_error_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="16sp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp" />
+        style="@style/error_message"/>
 
     <LinearLayout
         android:id="@+id/choice_one_row"

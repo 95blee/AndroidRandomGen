@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.security.SecureRandom;
 
 public class RandomNumberFragment extends Fragment {
@@ -25,6 +24,7 @@ public class RandomNumberFragment extends Fragment {
     private static final int DEFAULT_LOWER_BOUND = 0;
     private static final int UPPER_BOUND_LIMIT = 9999;
     private static final int LOWER_BOUND_LIMIT = -9999;
+    private static final String SAME_NUM_ERROR = "Entered numbers must be different";
 
     private SecureRandom random = new SecureRandom();
 
@@ -35,7 +35,7 @@ public class RandomNumberFragment extends Fragment {
         generateNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                generateNew(view);
+                generateNew();
             }
         });
         return view;
@@ -61,10 +61,20 @@ public class RandomNumberFragment extends Fragment {
         bound.setOnEditorActionListener(listener);
     }
 
-    private void generateNew(View view) {
-        TextView numberView = (TextView) getView().findViewById(R.id.numberView);
+    private void generateNew() {
+        View view = getView();
+        try {
+            int newNum = generateInt();
+        } catch (RuntimeException exception) {
+            TextView error = (TextView) view.findViewById(R.id.rand_num_error_message);
+            error.setText(SAME_NUM_ERROR);
+            return;
+        }
+        TextView numberView = (TextView) view.findViewById(R.id.numberView);
         numberView.setTextSize(60);
         numberView.setText(String.valueOf(generateInt()));
+        TextView error = (TextView) view.findViewById(R.id.rand_num_error_message);
+        error.setText("");
     }
 
     private int generateInt() {
@@ -89,6 +99,9 @@ public class RandomNumberFragment extends Fragment {
             lowerBound.setText(String.valueOf(lowBound));
         }
         int difference = upBound - lowBound;
+        if (difference == 0) {
+            throw new RuntimeException();
+        }
         return random.nextInt(difference) + lowBound;
     }
 }
