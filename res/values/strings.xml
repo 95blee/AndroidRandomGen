@@ -1,13 +1,24 @@
 <resources>
+    <!-- App wide strings -->
     <string name="app_name">Random</string>
-    <string name="edit_message">Enter a message</string>
-    <string name="generate_new">New Number</string>
-    <string name="choice_a">Choice A</string>
     <string name="drawer_open">Drawer Open</string>
-    <string name="default_rand_num_text">Press New Number to generate a new random number</string>
     <string name="options">Options</string>
+
+    <!-- Strings for random number generation option -->
+    <string name="generate_new">New Number</string>
+    <string name="default_rand_num_text">Press New Number to generate a new random number</string>
     <string name="and">and</string>
     <string name="num_gen_hint">Generate a random number between (max is 9999)</string>
     <string name="lower_bound_hint">0</string>
     <string name="upper_bound_hint">1000</string>
+
+    <!-- Strings for random choice selection -->
+    <string name="choice_input_box_hint">Enter an option here!</string>
+    <string name="choice_one_label">Choice 1</string>
+    <string name="choice_two_label">Choice 2</string>
+    <string name="choice_three_label">Choice 3</string>
+    <string name="choice_four_label">Choice 4</string>
+    <string name="choice_five_label">Choice 5</string>
+    <string name="choice_declaration_string">Random choice is:</string>
+    <string name="choice_button_label">Make random choice</string>
 </resources>
