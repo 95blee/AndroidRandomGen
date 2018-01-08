@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Random</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="generate_new">New Number</string>
+    <string name="choice_a">Choice A</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="default_rand_num_text">Press New Number to generate a new random number</string>
+    <string name="options">Options</string>
+    <string name="and">and</string>
+    <string name="num_gen_hint">Generate a random number between (max is 9999)</string>
+    <string name="lower_bound_hint">0</string>
+    <string name="upper_bound_hint">1000</string>
+</resources>
