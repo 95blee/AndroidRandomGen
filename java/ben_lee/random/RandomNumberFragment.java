@@ -1,16 +1,22 @@
 package ben_lee.random;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.security.SecureRandom;
 
@@ -35,6 +41,26 @@ public class RandomNumberFragment extends Fragment {
         return view;
     }
 
+    private void addEnterListener() {
+        View view = getView();
+        TextView.OnEditorActionListener listener = new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if ((keyEvent != null) && (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE)) {
+                    View keyboardCloseView = getView().getRootView();
+                    textView.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(keyboardCloseView.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
+                }
+                return false;
+            }
+        };
+        TextView bound = (TextView) view.findViewById(R.id.num_upper_bound);
+        bound.setOnEditorActionListener(listener);
+        bound = (TextView) view.findViewById(R.id.num_upper_bound);
+        bound.setOnEditorActionListener(listener);
+    }
+
     private void generateNew(View view) {
         TextView numberView = (TextView) getView().findViewById(R.id.numberView);
         numberView.setTextSize(60);
@@ -42,8 +68,9 @@ public class RandomNumberFragment extends Fragment {
     }
 
     private int generateInt() {
-        EditText lowerBound = (EditText) getView().findViewById(R.id.num_lower_bound);
-        EditText upperBound = (EditText) getView().findViewById(R.id.num_upper_bound);
+        View view = getView();
+        EditText lowerBound = (EditText) view.findViewById(R.id.num_lower_bound);
+        EditText upperBound = (EditText) view.findViewById(R.id.num_upper_bound);
         String lowBoundStr = lowerBound.getText().toString();
         String upBoundStr = upperBound.getText().toString();
         int lowBound = lowBoundStr.isEmpty() ? DEFAULT_LOWER_BOUND : Integer.parseInt(lowBoundStr);
