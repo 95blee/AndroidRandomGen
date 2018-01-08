@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,10 +24,18 @@ public class RandomNumberFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.random_number_fragment, container, false);
+        View view = inflater.inflate(R.layout.random_number_fragment, container, false);
+        Button generateNew = (Button) view.findViewById(R.id.generateNew);
+        generateNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                generateNew(view);
+            }
+        });
+        return view;
     }
 
-    public void generateNew(View view) {
+    private void generateNew(View view) {
         TextView numberView = (TextView) getView().findViewById(R.id.numberView);
         numberView.setTextSize(60);
         numberView.setText(String.valueOf(generateInt()));
