@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 return;
             }
-            Fragment randNumFragment = new RandomNumberFragment();
-            oldFragment = randNumFragment;
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, randNumFragment).commit();
+            Fragment initialFragment = new RandomNumberFragment();
+            oldFragment = initialFragment;
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, initialFragment).commit();
         }
     }
 
@@ -81,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 fragmentToSet = new RandomChoiceFragment();
+                break;
             case 2:
+                fragmentToSet = new CoinFlipFragment();
+                break;
             case 3:
             default:
                 break;
