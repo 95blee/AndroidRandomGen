@@ -20,7 +20,7 @@ public class RandomChoiceFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.make_choice_fragment, container, false);
+        View view = inflater.inflate(R.layout.random_choice_fragment, container, false);
         Button generateNew = (Button) view.findViewById(R.id.make_choice_button);
         generateNew.setOnClickListener(new View.OnClickListener() {
             @Override
