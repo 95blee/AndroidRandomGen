@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialiseFragment(Bundle savedInstanceState) {
+        Fragment initialFragment = new RandomNumberFragment();
+        oldFragment = initialFragment;
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, initialFragment).commit();
+        getSupportActionBar().setTitle(getResources().getStringArray(R.array.choices_array)[0]);
+        /*
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return;
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             oldFragment = initialFragment;
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, initialFragment).commit();
         }
+        */
     }
 
     private void createDrawer() {
@@ -57,9 +63,6 @@ public class MainActivity extends AppCompatActivity {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 replaceFragment();
-            }
-            public void onDrawerOpen(View drawerView) {
-                super.onDrawerOpened(drawerView);
             }
         };
         mDrawerToggle.syncState();
@@ -89,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
+        String[] titles = getResources().getStringArray(R.array.choices_array);
+        getSupportActionBar().setTitle(titles[position]);
     }
 
     private void replaceFragment() {
