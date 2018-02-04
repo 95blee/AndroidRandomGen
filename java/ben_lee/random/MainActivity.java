@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, appBar, R.string.drawer_open, R.string.drawer_open) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                replaceFragment();
             }
         };
         mDrawerToggle.syncState();
@@ -74,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             mDrawerLayout.closeDrawer(findViewById(R.id.left_drawer));
             switchOption(position);
+            replaceFragment();
         }
     }
 

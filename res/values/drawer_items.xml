@@ -4,6 +4,6 @@
         <item>Random Number</item>
         <item>Random Choice Selector</item>
         <item>Coin Flip</item>
-        <item>Dice Roll</item>
+        <!--<item>Dice Roll</item>-->
     </string-array>
 </resources>
